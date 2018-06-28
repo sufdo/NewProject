@@ -14,7 +14,7 @@
     <string name="pushup_hint">Enter No. of Pushups</string>
     <string name="sitReach_hint">Enter No. of Sit and Reach</string>
     <string name="cmj_hint">Enter CMJ performance</string>
-    <string name="jog_hint">Enter time taken to run/jog 1.5 miles</string>
+    <string name="jog_hint">Enter time in minutes</string>
 
     <string name="submit">Submit</string>
 </resources>
