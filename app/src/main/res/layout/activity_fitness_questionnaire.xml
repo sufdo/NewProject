@@ -52,7 +52,7 @@
             android:inputType="number"
             android:textSize="16sp"
             android:layout_marginBottom="20dp"
-            android:hint="@string/situp"
+            android:hint="@string/situp_hint"
             android:layout_marginLeft="5dp"/>
 
         <TextView
@@ -75,7 +75,7 @@
             android:layout_weight="1"
             android:textSize="16sp"
             android:layout_marginBottom="20dp"
-            android:hint="@string/pushup"
+            android:hint="@string/pushup_hint"
             android:layout_marginLeft="5dp"/>
 
         <TextView
@@ -98,7 +98,7 @@
             android:layout_weight="1"
             android:textSize="16sp"
             android:layout_marginBottom="20dp"
-            android:hint="@string/sitReach"
+            android:hint="@string/sitReach_hint"
             android:layout_marginLeft="5dp"/>
 
         <TextView
@@ -121,7 +121,7 @@
             android:layout_weight="1"
             android:textSize="16sp"
             android:layout_marginBottom="20dp"
-            android:hint="@string/cmj"
+            android:hint="@string/cmj_hint"
             android:layout_marginLeft="5dp"/>
 
         <TextView
@@ -144,7 +144,7 @@
             android:layout_weight="1"
             android:textSize="16sp"
             android:layout_marginBottom="20dp"
-            android:hint="@string/jog"
+            android:hint="@string/jog_hint"
             android:layout_marginLeft="5dp"/>
 
         <Button
