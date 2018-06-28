@@ -80,6 +80,7 @@
                 android:textColor="#fff" />
 
             <Button
+                android:id="@+id/login_btn"
                 style="@style/Base.TextAppearance.AppCompat.Body1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -90,7 +91,8 @@
                 android:text="Log in"
                 android:textAllCaps="false"
                 android:textColor="#f16f7d"
-                android:textSize="18sp" />
+                android:textSize="18sp"
+                android:onClick="login_clicked"/>
 
 
         </LinearLayout>

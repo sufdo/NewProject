@@ -9,10 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
-
-        </activity>
-        <activity android:name=".TrainerLogin" >
+        <activity android:name=".MainActivity"></activity>
+        <activity android:name=".TrainerLogin">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -21,7 +19,8 @@
         </activity>
         <activity android:name=".TrainerInterface" />
         <activity android:name=".TrainerProfile" />
-        <activity android:name=".PlayerRecommend"></activity>
+        <activity android:name=".PlayerRecommend" />
+        <activity android:name=".FitnessQuestionnaire"></activity>
     </application>
 
 </manifest>

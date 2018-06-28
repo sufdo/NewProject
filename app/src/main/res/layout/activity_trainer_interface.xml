@@ -46,6 +46,21 @@
             android:clickable="true"
             android:padding="16dp"/>
 
+        <Button
+            android:id="@+id/fitness_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/background_login"
+            android:text="@string/fitness_q"
+            style="@style/Base.TextAppearance.AppCompat.Body1"
+            android:textColor="#080708"
+            android:textAllCaps="false"
+            android:textSize="18sp"
+            android:layout_marginTop="5dp"
+            android:clickable="true"
+            android:padding="16dp"
+            android:onClick="fitness_clicked"/>
+
 
 
 
