@@ -4,17 +4,25 @@
     <string name="fitness_q">Fitness Questionnaire</string>
     //fitness questionnaire ui
     <string name="athlete">Name of athlete</string>
-    <string name="situp">No. of Sit-ups</string>
-    <string name="pushup">No. of Pushups</string>
-    <string name="sitReach">No. of Sit and Reach</string>
-    <string name="cmj">CMJ performance</string>
-    <string name="jog">Time taken to run/jog 1.5 miles</string>
+    <string name="totalShuttle">Total number of shuttle hits per day</string>
+    <string name="shuttleSet">Type of shuttle set</string>
+    <string name="flightTime">Flight time in Countermovement Jump</string>
+    <string name="fatigue">Fatigue Level</string>
 
-    <string name="situp_hint">Enter No. of Sit-ups</string>
-    <string name="pushup_hint">Enter No. of Pushups</string>
-    <string name="sitReach_hint">Enter No. of Sit and Reach</string>
-    <string name="cmj_hint">Enter CMJ performance</string>
-    <string name="jog_hint">Enter time in minutes</string>
+    <string name="totalShuttle_hint">Enter total number of shuttle hits per day</string>
+    <string name="flightTime_hint">Enter flight time in CMJ</string>
 
     <string name="submit">Submit</string>
+
+    //radio buttons in fitness questionnaire ui
+    <string name="threeSet">Three Set</string>
+    <string name="twoSet">Two Set</string>
+    <string name="mixSet">Mix Set</string>
+    <string name="none">None</string>
+    <string name="mild">Mild</string>
+    <string name="moderate">Moderate</string>
+    <string name="severe">Severe</string>
+
+    //TSB
+    <string name="tsb_ui">TSB</string>
 </resources>
