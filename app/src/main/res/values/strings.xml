@@ -25,4 +25,14 @@
 
     //TSB
     <string name="tsb_ui">TSB</string>
+
+    //spinner
+    <string-array name="athletes">
+        <item>athlete 1</item>
+        <item>athlete 2</item>
+        <item>athlete 3</item>
+        <item>athlete 4</item>
+        <item>athlete 5</item>
+        <item>athlete 6</item>
+    </string-array>
 </resources>
