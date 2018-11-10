@@ -1,6 +1,7 @@
 package com.example.user.project;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -10,13 +11,16 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 public class FitnessQuestionnaire extends AppCompatActivity implements AdapterView.OnItemSelectedListener{
-
+    String trainerID;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setTitle(R.string.fitness_q);
         setContentView(R.layout.activity_fitness_questionnaire);
 
+        SharedPreferences sharedPref=getApplicationContext().getSharedPreferences("TrainerPref",0);
+        trainerID=sharedPref.getString("TrainerID","");
+        
         /**
         Spinner spinner= findViewById(R.id.spinner);
         ArrayAdapter<CharSequence> adapter=ArrayAdapter.createFromResource(this,R.array.athletes,android.R.layout.simple_spinner_item);
