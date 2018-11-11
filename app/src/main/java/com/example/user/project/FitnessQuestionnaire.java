@@ -18,6 +18,7 @@ import android.widget.RadioButton;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.example.user.project.model.AthleteInitial;
 import com.example.user.project.model.Fitness;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -48,7 +49,8 @@ public class FitnessQuestionnaire extends AppCompatActivity implements AdapterVi
     String ServerURL;
     String id,athlete,nic,date,dob,trainer,approved;
     String trainerID;
-    //String athleteArr[];
+
+    List<AthleteInitial> athleteList=new ArrayList<AthleteInitial>();
     List athleteArr =new ArrayList();
     Spinner spinner;
     ArrayAdapter<String> adapter;
@@ -90,18 +92,6 @@ public class FitnessQuestionnaire extends AppCompatActivity implements AdapterVi
 
         mProgressBar=(ProgressBar)findViewById(R.id.progressBar);
         mProgressBar.setVisibility(View.GONE);
-
-        /**
-        Spinner spinner= findViewById(R.id.spinner);
-        ArrayAdapter<CharSequence> adapter=ArrayAdapter.createFromResource(this,R.array.athletes,android.R.layout.simple_spinner_item);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner.setAdapter(adapter);
-
-        spinner.setOnItemSelectedListener(this);
-        **/
-
-        //String athleteArr[]={"athlete1","athlete2","athlete3"};
-
 
         spinner= findViewById(R.id.spinner);
         adapter= new ArrayAdapter<String>(this,android.R.layout.simple_spinner_dropdown_item,athleteArr);
@@ -302,7 +292,6 @@ public class FitnessQuestionnaire extends AppCompatActivity implements AdapterVi
         }
         @Override
         protected Void doInBackground(Void... voids) {
-            ServerURL = "https://murmuring-cove-69371.herokuapp.com/athleteInit/trainerID/"+trainerID;
             doGet();
             return null;
         }
@@ -310,57 +299,77 @@ public class FitnessQuestionnaire extends AppCompatActivity implements AdapterVi
         {
             try
             {
-                URL url = new URL(ServerURL);
+                URL url = new URL("https://murmuring-cove-69371.herokuapp.com/athleteInit/trainerID/"+trainerID);
                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-                conn.setRequestMethod("GET");
-                conn.setRequestProperty("Content-Type", "application/json");
-                conn.setRequestProperty("Accept","application/json");
 
-                InputStream responseBody = conn.getInputStream();
-                InputStreamReader responseBodyReader = new InputStreamReader(responseBody,"UTF-8");
-                JsonReader jsonReader = new JsonReader(responseBodyReader);
-                //jsonReader.beginArray();
-                jsonReader.beginArray();
-                while (jsonReader.hasNext()){
-                    jsonReader.beginObject();
+                //check the connection status
+                if(conn.getResponseCode()==200)
+                {
+                    //if response code=200 - HTTP.OK
+                    InputStream in=new BufferedInputStream(conn.getInputStream());
 
-                    while( jsonReader.hasNext() ) {
-                        String idName = jsonReader.nextName();
-                        id = jsonReader.nextString();
-                        String athleteName = jsonReader.nextName();
-                        athlete = jsonReader.nextString();
-                        athleteArr.add(athlete);
-                        String nicName = jsonReader.nextName();
-                        nic = jsonReader.nextString();
-                        String dateName = jsonReader.nextName();
-                        date = jsonReader.nextString();
-                        String dobName = jsonReader.nextName();
-                        dob = jsonReader.nextString();
-                        String trainerName = jsonReader.nextName();
-                        trainer = jsonReader.nextString();
-                        String approvedName = jsonReader.nextName();
-                        approved = jsonReader.nextString();
-
+                    //read the BufferedInputStream
+                    BufferedReader r=new BufferedReader(new InputStreamReader(in));
+                    StringBuilder sb=new StringBuilder();
+                    String line;
+                    while ((line=r.readLine())!=null)
+                    {
+                        sb.append(line);
                     }
+                    stream=sb.toString();
+                    conn.disconnect();
+                }
 
+                else
+                {
 
                 }
 
-                jsonReader.close();
+                Gson gson=new Gson();
+                Type listType=new TypeToken<List<AthleteInitial>>(){}.getType();
+                athleteList=gson.fromJson(stream,listType);//parse to list
+
+
 
             } catch (Exception e) {
                 e.printStackTrace();
             }
-
-
         }
         protected void onPostExecute(Void voids) {
             super.onPostExecute(voids);
-            spinner.setAdapter(adapter);
-            mProgressBar.setVisibility(View.GONE);
+
+
+            if(!athleteList.isEmpty())
+            {
+                Log.i("FITNESS_Q", "size"+athleteList.size());
+
+                for(int i=0;i<(athleteList.size()-1);i++)
+                {
+                    Log.i("FITNESS_Q", "name"+athleteList.get(i).getName());
+                    Log.i("FITNESS_Q" , "nic"+athleteList.get(i).getNic());
+                    if(athleteArr.isEmpty())
+                    {
+                        athleteArr.add(athleteList.get(i).getName());
+                    }
+                    else
+                    {
+                        if(!athleteArr.contains(athleteList.get(i).getName()))
+                        {
+                            athleteArr.add(athleteList.get(i).getName());
+                        }
+                    }
+                }
+                spinner.setAdapter(adapter);
+                mProgressBar.setVisibility(View.GONE);
+            }
+            else
+            {
+
+            }
+
+
         }
     }
-
     //post fitness details
     class SendData extends AsyncTask {
 
