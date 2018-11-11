@@ -10,7 +10,7 @@
     <string name="fatigue">Fatigue Level</string>
 
     <string name="totalShuttle_hint">Enter total number of shuttle hits per day</string>
-    <string name="flightTime_hint">Enter flight time in CMJ</string>
+    <string name="flightTime_hint">Enter flight time in seconds</string>
 
     <string name="submit">Submit</string>
 

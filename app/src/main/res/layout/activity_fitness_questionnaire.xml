@@ -13,6 +13,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            style="?android:attr/progressBarStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
         <TextView
             android:id="@+id/athlete"
             android:layout_width="match_parent"
@@ -72,19 +80,19 @@
             android:layout_weight="1" >
 
             <RadioButton
-                android:id="@+id/radioButton1"
+                android:id="@+id/type1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="@string/threeSet" />
             <RadioButton
-                android:id="@+id/radioButton2"
+                android:id="@+id/type2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="@string/twoSet" />
             <RadioButton
-                android:id="@+id/radioButton3"
+                android:id="@+id/type3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -93,7 +101,7 @@
         </RadioGroup>
 
         <TextView
-            android:id="@+id/flightTime"
+                android:id="@+id/flightTime"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/flightTime"
@@ -109,7 +117,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:inputType="number"
+            android:inputType="numberDecimal"
             android:layout_weight="1"
             android:textSize="16sp"
             android:layout_marginBottom="20dp"
