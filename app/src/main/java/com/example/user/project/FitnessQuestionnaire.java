@@ -415,7 +415,14 @@ public class FitnessQuestionnaire extends AppCompatActivity implements AdapterVi
 
                 Log.i("STATUS", String.valueOf(conn.getResponseCode()));
                 Log.i("MSG" , conn.getResponseMessage());
-
+                if(conn.getResponseCode()==200)
+                {
+                    message="Successfully saved";
+                }
+                else
+                {
+                    message="Error";
+                }
                 conn.disconnect();
 
             } catch (MalformedURLException e) {
@@ -431,7 +438,7 @@ public class FitnessQuestionnaire extends AppCompatActivity implements AdapterVi
 
         protected void onPostExecute(Object object) {
             super.onPostExecute(object);
-            toastMessage("Successfully saved");
+            toastMessage(message);
             //Intent intent = new Intent(InjuryAdd.this, Injury_View.class);
             //intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             //startActivity(intent);
