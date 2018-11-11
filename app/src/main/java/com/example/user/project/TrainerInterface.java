@@ -27,4 +27,13 @@ public class TrainerInterface extends AppCompatActivity {
             startActivity(intent);
         }
     }
+
+    public void tsb_clicked(View view)
+    {
+        if(view.getId()==R.id.tsb_btn)
+        {
+            Intent intent=new Intent(this,TSB.class);
+            startActivity(intent);
+        }
+    }
 }
