@@ -25,6 +25,7 @@
 
     //TSB
     <string name="tsb_ui">TSB</string>
+    <string name="latest">Latest TSB</string>
 
     //spinner
     <string-array name="athletes">
