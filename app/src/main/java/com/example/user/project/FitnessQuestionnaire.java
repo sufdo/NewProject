@@ -278,8 +278,7 @@ public class FitnessQuestionnaire extends AppCompatActivity implements AdapterVi
                 dialog.show();
             }
 
-            //Intent intent=new Intent(this,TSB.class);
-            //startActivity(intent);
+
         }
     }
 
@@ -439,10 +438,10 @@ public class FitnessQuestionnaire extends AppCompatActivity implements AdapterVi
         protected void onPostExecute(Object object) {
             super.onPostExecute(object);
             toastMessage(message);
-            //Intent intent = new Intent(InjuryAdd.this, Injury_View.class);
-            //intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            //startActivity(intent);
-            //finish();
+            Intent intent=new Intent(FitnessQuestionnaire.this,TSB.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(intent);
+            finish();
         }
     }
 
