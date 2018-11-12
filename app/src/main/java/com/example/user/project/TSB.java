@@ -36,8 +36,8 @@ public class TSB extends AppCompatActivity implements AdapterView.OnItemSelected
     Spinner spinner2;
     ArrayAdapter<String> adapter2;
     ProgressBar mProgressBar2;
-    static String stream=null;
-    static String stream2=null;
+    static String stream3=null;
+    static String stream4=null;
     List<AthleteInitial> athleteList=new ArrayList<AthleteInitial>();
     List athleteArr =new ArrayList();
     String athleteName;
@@ -117,7 +117,7 @@ public class TSB extends AppCompatActivity implements AdapterView.OnItemSelected
                     {
                         sb.append(line);
                     }
-                    stream=sb.toString();
+                    stream3=sb.toString();
                     conn.disconnect();
                 }
 
@@ -128,7 +128,7 @@ public class TSB extends AppCompatActivity implements AdapterView.OnItemSelected
 
                 Gson gson=new Gson();
                 Type listType=new TypeToken<List<AthleteInitial>>(){}.getType();
-                athleteList=gson.fromJson(stream,listType);//parse to list
+                athleteList=gson.fromJson(stream3,listType);//parse to list
 
 
 
@@ -206,7 +206,7 @@ public class TSB extends AppCompatActivity implements AdapterView.OnItemSelected
                     {
                         sb.append(line);
                     }
-                    stream2=sb.toString();
+                    stream4=sb.toString();
                     conn.disconnect();
                 }
 
@@ -217,7 +217,7 @@ public class TSB extends AppCompatActivity implements AdapterView.OnItemSelected
 
                 Gson gson=new Gson();
                 Type listType=new TypeToken<List<Fitness>>(){}.getType();
-                fitnessList2=gson.fromJson(stream2,listType);//parse to list
+                fitnessList2=gson.fromJson(stream4,listType);//parse to list
 
 
 

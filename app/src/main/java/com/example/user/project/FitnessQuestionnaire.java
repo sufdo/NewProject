@@ -18,6 +18,7 @@ import android.widget.RadioButton;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.example.user.project.model.AthleteInitial;
 import com.example.user.project.model.Fitness;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -41,6 +42,7 @@ import java.text.SimpleDateFormat;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 public class FitnessQuestionnaire extends AppCompatActivity implements AdapterView.OnItemSelectedListener{
@@ -49,6 +51,7 @@ public class FitnessQuestionnaire extends AppCompatActivity implements AdapterVi
     String id,athlete,nic,date,dob,trainer,approved;
     String trainerID;
     //String athleteArr[];
+    List<AthleteInitial> athleteList=new ArrayList<AthleteInitial>();
     List athleteArr =new ArrayList();
     Spinner spinner;
     ArrayAdapter<String> adapter;
@@ -66,19 +69,24 @@ public class FitnessQuestionnaire extends AppCompatActivity implements AdapterVi
     String athleteName;
     Long dateLong;
     String currentDate;
-    String CTL,fitnessPerDay,fatiguePerDay,ATL,TSB;
+    String CTL=null;
+    String ATL=null;
+    String TSB=null;
+    String fitnessPerDay,fatiguePerDay;
 
     double score,fitnessPerDayDouble,flightTimeDouble,jumpHeight,fatiguePerDayDouble;
     double weight_ShuttleLoad,weight_cmj,weight_fatigue;
     int fatigueLevelInt;
     Validation validation=new Validation();
-    static String stream=null;
+    static String stream1=null;
+    static String stream2=null;
     String message;
     List<Fitness> fitnessList=new ArrayList<Fitness>();
     int count;
     Double ATLdouble=0.0;
     Double CTLdouble=0.0;
     long TSBLong=0;
+    HashMap<String,String> nameNic=new HashMap<String, String>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -286,6 +294,8 @@ public class FitnessQuestionnaire extends AppCompatActivity implements AdapterVi
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         athleteName= parent.getItemAtPosition(position).toString();
         Toast.makeText(parent.getContext(),athleteName,Toast.LENGTH_SHORT).show();
+
+        nic=nameNic.get(athleteName);
     }
 
     @Override
@@ -302,7 +312,7 @@ public class FitnessQuestionnaire extends AppCompatActivity implements AdapterVi
         }
         @Override
         protected Void doInBackground(Void... voids) {
-            ServerURL = "https://murmuring-cove-69371.herokuapp.com/athleteInit/trainerID/"+trainerID;
+            //ServerURL = "https://murmuring-cove-69371.herokuapp.com/athleteInit/trainerID/"+trainerID;
             doGet();
             return null;
         }
@@ -310,55 +320,79 @@ public class FitnessQuestionnaire extends AppCompatActivity implements AdapterVi
         {
             try
             {
-                URL url = new URL(ServerURL);
+                URL url = new URL("https://murmuring-cove-69371.herokuapp.com/athleteInit/trainerID/"+trainerID);
                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-                conn.setRequestMethod("GET");
-                conn.setRequestProperty("Content-Type", "application/json");
-                conn.setRequestProperty("Accept","application/json");
 
-                InputStream responseBody = conn.getInputStream();
-                InputStreamReader responseBodyReader = new InputStreamReader(responseBody,"UTF-8");
-                JsonReader jsonReader = new JsonReader(responseBodyReader);
-                //jsonReader.beginArray();
-                jsonReader.beginArray();
-                while (jsonReader.hasNext()){
-                    jsonReader.beginObject();
+                //check the connection status
+                if(conn.getResponseCode()==200)
+                {
+                    //if response code=200 - HTTP.OK
+                    InputStream in=new BufferedInputStream(conn.getInputStream());
 
-                    while( jsonReader.hasNext() ) {
-                        String idName = jsonReader.nextName();
-                        id = jsonReader.nextString();
-                        String athleteName = jsonReader.nextName();
-                        athlete = jsonReader.nextString();
-                        athleteArr.add(athlete);
-                        String nicName = jsonReader.nextName();
-                        nic = jsonReader.nextString();
-                        String dateName = jsonReader.nextName();
-                        date = jsonReader.nextString();
-                        String dobName = jsonReader.nextName();
-                        dob = jsonReader.nextString();
-                        String trainerName = jsonReader.nextName();
-                        trainer = jsonReader.nextString();
-                        String approvedName = jsonReader.nextName();
-                        approved = jsonReader.nextString();
-
+                    //read the BufferedInputStream
+                    BufferedReader r=new BufferedReader(new InputStreamReader(in));
+                    StringBuilder sb=new StringBuilder();
+                    String line;
+                    while ((line=r.readLine())!=null)
+                    {
+                        sb.append(line);
                     }
+                    stream1=sb.toString();
+                    conn.disconnect();
+                }
 
+                else
+                {
 
                 }
 
-                jsonReader.close();
+                Gson gson=new Gson();
+                Type listType=new TypeToken<List<AthleteInitial>>(){}.getType();
+                athleteList=gson.fromJson(stream1,listType);//parse to list
+
+
 
             } catch (Exception e) {
                 e.printStackTrace();
             }
-
-
         }
         protected void onPostExecute(Void voids) {
             super.onPostExecute(voids);
-            spinner.setAdapter(adapter);
-            mProgressBar.setVisibility(View.GONE);
+
+
+            if(!athleteList.isEmpty())
+            {
+                Log.i("TSB", "size"+athleteList.size());
+
+                for(int i=0;i<(athleteList.size()-1);i++)
+                {
+                    Log.i("TSB", "name"+athleteList.get(i).getName());
+                    Log.i("TSB" , "nic"+athleteList.get(i).getNic());
+                    if(athleteArr.isEmpty())
+                    {
+                        athleteArr.add(athleteList.get(i).getName());
+                        nameNic.put(athleteList.get(i).getName(),athleteList.get(i).getNic());
+                    }
+                    else
+                    {
+                        if(!athleteArr.contains(athleteList.get(i).getName()))
+                        {
+                            athleteArr.add(athleteList.get(i).getName());
+                            nameNic.put(athleteList.get(i).getName(),athleteList.get(i).getNic());
+                        }
+                    }
+                }
+                spinner.setAdapter(adapter);
+                mProgressBar.setVisibility(View.GONE);
+            }
+            else
+            {
+
+            }
+
+
         }
+
     }
 
     //post fitness details
@@ -470,7 +504,7 @@ public class FitnessQuestionnaire extends AppCompatActivity implements AdapterVi
                     {
                         sb.append(line);
                     }
-                    stream=sb.toString();
+                    stream2=sb.toString();
                     conn.disconnect();
                     //message="succesfully saved";
                 }
@@ -482,7 +516,7 @@ public class FitnessQuestionnaire extends AppCompatActivity implements AdapterVi
 
                 Gson gson=new Gson();
                 Type listType=new TypeToken<List<Fitness>>(){}.getType();
-                fitnessList=gson.fromJson(stream,listType);//parse to list
+                fitnessList=gson.fromJson(stream2,listType);//parse to list
 
 
 
@@ -555,7 +589,12 @@ public class FitnessQuestionnaire extends AppCompatActivity implements AdapterVi
                 }
 
             }
-
+            else
+            {
+                CTL="null";
+                ATL="null";
+                TSB="null";
+            }
 
         }
     }
