@@ -10,10 +10,10 @@ public class Fitness {
     private String flightTime;
     private String fatigueLevel;
     private String fitnessPerDay;
-    private String CTL;
+    private String ctl;
     private String fatiguePerDay;
-    private String ATL;
-    private String TSB;
+    private String atl;
+    private String tsb;
     private String date;
 
     public String getId() {
@@ -88,12 +88,12 @@ public class Fitness {
         this.fitnessPerDay = fitnessPerDay;
     }
 
-    public String getCTL() {
-        return CTL;
+    public String getCtl() {
+        return ctl;
     }
 
-    public void setCTL(String CTL) {
-        this.CTL = CTL;
+    public void setCtl(String ctl) {
+        this.ctl = ctl;
     }
 
     public String getFatiguePerDay() {
@@ -104,20 +104,20 @@ public class Fitness {
         this.fatiguePerDay = fatiguePerDay;
     }
 
-    public String getATL() {
-        return ATL;
+    public String getAtl() {
+        return atl;
     }
 
-    public void setATL(String ATL) {
-        this.ATL = ATL;
+    public void setAtl(String atl) {
+        this.atl = atl;
     }
 
-    public String getTSB() {
-        return TSB;
+    public String getTsb() {
+        return tsb;
     }
 
-    public void setTSB(String TSB) {
-        this.TSB = TSB;
+    public void setTsb(String tsb) {
+        this.tsb = tsb;
     }
 
     public String getDate() {
